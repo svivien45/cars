@@ -32,6 +32,9 @@ function getMakers($csvData)
     
     foreach ($csvData as $idx => $line) 
     {
+        if (!is_array($line)){
+            continue;
+        }
         if ($idx == 0){
             continue;
         }
