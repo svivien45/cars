@@ -1,26 +1,19 @@
 <?php
 
-function getCsvData($cars, $withHeader = true) { 
-    $cars = "car-db.csv";
+function getCsvData($cars) { 
     if (!file_exists($cars)) {
         echo "$cars nem található";
         return false;
     }
 
-    $car = fopen($cars,"r");
-    $header = fgetcsv($car);
-    if ($withHeader) {
-        $lines[] = $header;
-    }
-    else {
-        $lines = [];
-    }
+    $csv = fopen($cars,"r");
+    $lines = [];
 
-    while (!feof($car)) {
-        $line = fgetcsv($car);
+    while (!feof($csv)) {
+        $line = fgetcsv($csv);
         $lines[] = $line;
     }
-    fclose($car);
+    fclose($csv);
 
     return $lines;
     
