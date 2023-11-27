@@ -1,6 +1,7 @@
 <?php
 
 require_once("cars.php");
+require_once("db-tools.php");
 ini_set('memory_limit', '560M');
 
 $fileName = "car-db.csv";
@@ -26,10 +27,14 @@ foreach ($makers as $maker){
     echo "$maker\n";
 }
 
+/*
 $result = $mysqli->query("SELECT COUNT(id) as cnt FROM makers;");
 $row = $result->fetch_assoc();
 
 echo "{$row['cnt']} sor van;\n";
+*/
+
+$result = insertMakers($mysqli, $makers, true);
 
 $mysqli->close();
 
