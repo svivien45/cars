@@ -35,6 +35,7 @@ function getMaker($mysqli, $id){
 function getMakerByName($mysqli, $name){
     $result = $mysqli->query("SELECT * FROM makers WHERE name=$name");
     $maker = $result->fetch_assoc();
+    $result->free_result();
 
     return $maker;
 }
@@ -47,7 +48,8 @@ function deleteMaker($mysqli, $id){
 
 function getAllMakers($mysqli){
     $result = $mysqli->query("SELECT * FROM makers");
-    $maker = $result->fetch_assoc();
+    $maker = $result->fetch_assoc(MYSQL_ASSOC);
+    $result->free_result();
 
     return $maker;
 }
