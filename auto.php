@@ -2,7 +2,7 @@
 
 require_once("cars.php");
 require_once("db-tools.php");
-require_once("carDBtools.php");
+require_once("MakersDBTools.php");
 ini_set('memory_limit', '560M');
 
 $fileName = "car-db.csv";
@@ -19,17 +19,15 @@ if ($mysqli -> connect_errno) {
     exit();
 }
 */
-$CarDBtools = new CarDBtools();
+$MakersDBTools = new MakersDBTools();
 echo "connected\n";
 
 $makers = getMakers($csvData);
 
-$mysqli->query("TRUNCATE TABLE makers");
-
 $errors = [];
 foreach ($makers as $maker){
     //$mysqli->query("INSERT INTO makers (name) VALUES ('$maker')");
-    $result = $carDBtools->createMaker($maker);
+    $result = $MakersDBTools->createMaker($maker);
     if (!$result){
         $errors[] = $maker;
     }
@@ -40,13 +38,8 @@ foreach ($makers as $maker){
 //$result = $mysqli->query("SELECT COUNT(id) as cnt FROM makers;");
 //$row = $result->fetch_assoc();
 
-$allMakers = $carDBtools->getAllMakers($mysqli);
+$allMakers = $MakersDBTools->getAllMakers();
 $cnt = count($allMakers);
 echo "$cnt sor van;\n";
-
-
-$result = insertMakers($mysqli, $makers, true);
-
-$mysqli->close();
 
 ?>
