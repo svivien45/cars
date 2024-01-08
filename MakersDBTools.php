@@ -15,7 +15,7 @@ class MakersDBTools {
 
     function createMaker($maker)
     {
-        $result = $this->mysqli->query("INSERT INTO makers (name) VALUES ('$maker')");
+        $result = $this->mysqli->query("INSERT INTO {self:.DBTABLE} (name) VALUES ('$maker')");
         if (!$result) {
             echo "hiba történt a $maker beszúrása közben";
             return $result;
@@ -25,7 +25,7 @@ class MakersDBTools {
     }   
 
     function getAllMakers(){
-        $result = $this->mysqli->query("SELECT * FROM makers");
+        $result = $this->mysqli->query("SELECT * FROM {self:.DBTABLE}");
         $maker = $result->fetch_all(MYSQLI_ASSOC);
         $result->free_result();
     
