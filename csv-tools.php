@@ -37,3 +37,26 @@ function getMakers($csvData)
 
     return $makers;
 }
+
+function getMakers($csvData)
+{
+    $idxMaker = array_search('make', $csvData[0]);
+    $makers = [];
+    $isHeader = true;
+    foreach ($csvData as $data) {
+        if (!is_array($data)) {
+            continue;
+        }
+        if ($isHeader) {
+            $isHeader = false;
+            continue;
+        }
+
+        $maker = $data[$idxMaker];
+        if (!in_array($maker, $makers)) {
+            $makers[] = $maker;
+        }
+    }
+
+    return $makers;
+}
